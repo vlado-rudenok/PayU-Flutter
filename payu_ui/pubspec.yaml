@@ -12,6 +12,7 @@ environment:
   flutter: ">=2.5.0"
 
 dependencies:
+  cached_network_image: 3.3.0
   flutter:
     sdk: flutter
   payu_interface: 

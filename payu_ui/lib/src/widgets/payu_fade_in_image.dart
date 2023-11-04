@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import 'package:payu_ui/payu_ui.dart';
@@ -7,7 +8,8 @@ class PayuFadeInImage extends StatelessWidget {
   final IconData? icon;
   final double? size;
 
-  const PayuFadeInImage({Key? key, this.uri, this.icon, this.size}) : super(key: key);
+  const PayuFadeInImage({Key? key, this.uri, this.icon, this.size})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,18 +23,15 @@ class _UriFadeInImage extends StatelessWidget {
   final String uri;
   final double? size;
 
-  const _UriFadeInImage({Key? key, required this.uri, this.size}) : super(key: key);
+  const _UriFadeInImage({Key? key, required this.uri, this.size})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return FadeInImage.assetNetwork(
-      fadeInDuration: const Duration(milliseconds: 250),
-      image: uri,
-      placeholder: uri,
-      imageErrorBuilder: (context, object, trace) => const SizedBox(),
-      placeholderErrorBuilder: (context, object, trace) => const SizedBox(),
-      width: size,
-      height: size,
+    return CachedNetworkImage(
+      imageUrl: uri,
+      placeholder: (context, url) => const SizedBox.shrink(),
+      errorWidget: (context, url, error) => const SizedBox.shrink(),
     );
   }
 }
@@ -41,7 +40,8 @@ class _IconFadeInImage extends StatelessWidget {
   final IconData icon;
   final double? size;
 
-  const _IconFadeInImage({Key? key, required this.icon, this.size}) : super(key: key);
+  const _IconFadeInImage({Key? key, required this.icon, this.size})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
